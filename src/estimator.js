@@ -1,19 +1,19 @@
 const covid19ImpactEstimator = (data) => {
 
   class InputData {
-        constructor(country, avgAge, avgDailyIncomeInUSD,avgDailyIncomePopulation, periodType, timeToElapse, reportedCases, population, totalHospitalBeds) {
-        this.region = {
-        name: country,
-        avgAge: avgAge,
-        avgDailyIncomeInUSD: avgDailyIncomeInUSD,
-        avgDailyIncomePopulation: avgDailyIncomePopulation
-        },
-        this.periodType = periodType,
-        this.timeToElapse = timeToElapse,
-        this.reportedCases = reportedCases,
-        this.population = population,
-        this.totalHospitalBeds = totalHospitalBeds;
-        }
+    constructor(country, avgAge, avgDailyIncomeInUSD,avgDailyIncomePopulation, periodType, timeToElapse, reportedCases, population, totalHospitalBeds) {
+    this.region = {
+    name: country,
+    avgAge: avgAge,
+    avgDailyIncomeInUSD: avgDailyIncomeInUSD,
+    avgDailyIncomePopulation: avgDailyIncomePopulation
+    },
+    this.periodType = periodType,
+    this.timeToElapse = timeToElapse,
+    this.reportedCases = reportedCases,
+    this.population = population,
+    this.totalHospitalBeds = totalHospitalBeds;
+    }
        }
     
          InputData = data;
