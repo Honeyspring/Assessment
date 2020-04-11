@@ -1,68 +1,52 @@
 const covid19ImpactEstimator = (data) => {
   let InputData = {
-      data: {
-        region: {
-            name: regionName,
-            avgAge: avgAge,
-            avgDailyIncomeInUSD: avgDailyIncomeInUSD,
-            avgDailyIncomePopulation: avgDailyIncomePopulation
-    },
-    periodType: periodType,
-    timeToElapse: timeToElapse,
-    reportedCases: reportedCases,
-    population:population,
-    totalHospitalBeds: totalHospitalBeds
+    data: {
+      region: {
+        name: regionName,
+        avgAge,
+        avgDailyIncomeInUSD,
+        avgDailyIncomePopulation
+      },
+      periodType,
+      timeToElapse,
+      reportedCases,
+      population,
+      totalHospitalBeds
     }
-}
-InputData= data; 
+  };
+  InputData = data;
 
   const outputData = {
-    data: InputData, 
+    data: InputData,
     impact: {
       currentlyInfected: (reportedCases) => reportedCases * 10,
-      infectionsByRequestedTime: (currentlyInfected,factor) =>{ 
-      return currentlyInfected *Math.pow(2 * factor);
-      },
-      severeCasesByRequestedTime: (infectionsByRequestedTime) => {
-        return infectionsByRequestedTime * 0.15;
-      },
+      infectionsByRequestedTime: (currentlyInfected, factor) => currentlyInfected * (2 ** factor),
+      severeCasesByRequestedTime: (infectionsByRequestedTime) => infectionsByRequestedTime * 0.15,
       hospitalBedsByRequestedTime: (totalHospitalBeds) => totalHospitalBeds * 0.35,
-      casesForICUByRequestedTime: (infectionsByRequestedTime) => {
-       return infectionsByRequestedTime * 0.05
-      },
-      casesForVentilatorsByRequestedTime: (infectionsByRequestedTime) =>{
-        return infectionsByRequestedTime * 0.02;
-      },
-      dollarsInFlight:(infectionsByRequestedTime, avgDailyIncomeInUSD,
-         avgDailyIncomePopulation, timeToElapse) => {
-    return (infectionsByRequestedTime * avgDailyIncomePopulation) * 
-      avgDailyIncomeInUSD * timeToElapse
-         }
+      casesForICUByRequestedTime: (infectionsByRequestedTime) => infectionsByRequestedTime
+      * 0.05,
+      casesForVentilatorsByRequestedTime: (infectionsByRequestedTime) => infectionsByRequestedTime
+       * 0.02,
+      dollarsInFlight: (infectionsByRequestedTime, avgDailyIncomeInUSD,
+        avgDailyIncomePopulation, timeToElapse) => (infectionsByRequestedTime
+          * avgDailyIncomePopulation) * avgDailyIncomeInUSD * timeToElapse
     },
     //  severe case estimation
     severeImpact: {
       currentlyInfected: (reportedCases) => reportedCases * 50,
-      infectionsByRequestedTime: (currentlyInfected,factor) =>{ 
-      return currentlyInfected *Math.pow(2 * factor);
-      },
-      severeCasesByRequestedTime: (infectionsByRequestedTime) => {
-        return infectionsByRequestedTime * 0.15;
-      },
+      infectionsByRequestedTime: (currentlyInfected, factor) => currentlyInfected * (2 ** factor),
+      severeCasesByRequestedTime: (infectionsByRequestedTime) => infectionsByRequestedTime * 0.15,
       hospitalBedsByRequestedTime: (totalHospitalBeds) => totalHospitalBeds * 0.35,
-      casesForICUByRequestedTime: (infectionsByRequestedTime) => {
-       return infectionsByRequestedTime * 0.05
-      },
-      casesForVentilatorsByRequestedTime: (infectionsByRequestedTime) =>{
-        return infectionsByRequestedTime * 0.02;
-      },
-      dollarsInFlight:(infectionsByRequestedTime, avgDailyIncomeInUSD,
-         avgDailyIncomePopulation, timeToElapse) => {
-      return (infectionsByRequestedTime * avgDailyIncomePopulation) * 
-      avgDailyIncomeInUSD * timeToElapse
-         }
+      casesForICUByRequestedTime: (infectionsByRequestedTime) => infectionsByRequestedTime
+       * 0.05,
+      casesForVentilatorsByRequestedTime: (infectionsByRequestedTime) => infectionsByRequestedTime
+       * 0.02,
+      dollarsInFlight: (infectionsByRequestedTime, avgDailyIncomeInUSD,
+        avgDailyIncomePopulation, timeToElapse) => (infectionsByRequestedTime
+           * avgDailyIncomePopulation) * avgDailyIncomeInUSD * timeToElapse
     }
 
-  }
+  };
   return outputData;
 };
 
