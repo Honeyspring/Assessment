@@ -1,11 +1,11 @@
 const covid19ImpactEstimator = (data) => {
   let InputData = {
-  data: {
-    region: {
-    name: regionName,
-    avgAge: avgAge,
-    avgDailyIncomeInUSD: avgDailyIncomeInUSD,
-    avgDailyIncomePopulation: avgDailyIncomePopulation
+      data: {
+        region: {
+            name: regionName,
+            avgAge: avgAge,
+            avgDailyIncomeInUSD: avgDailyIncomeInUSD,
+            avgDailyIncomePopulation: avgDailyIncomePopulation
     },
     periodType: periodType,
     timeToElapse: timeToElapse,
@@ -14,7 +14,7 @@ const covid19ImpactEstimator = (data) => {
     totalHospitalBeds: totalHospitalBeds
     }
 }
-InpuData= data; 
+InputData= data; 
 
   const outputData = {
     data: InputData, 
