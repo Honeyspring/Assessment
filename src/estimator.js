@@ -7,8 +7,6 @@ const covid19ImpactEstimator = (data) => {
 
   impact.currentlyInfected = data.reportedCases * 10;
   severeImpact.currentlyInfected = data.reportedCases * 50;
-   
-
   // converts to days
   if (data.periodType === 'days') {
     data.timeToElapse *= 1;
