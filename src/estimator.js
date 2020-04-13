@@ -17,15 +17,14 @@ const covid19ImpactEstimator = (data) => {
   }
   // double report every 3 days
   if (data.periodType === 'days' && data.timeToElapse < 3) {
-    impact.infectionsByRequestedTime = impact.currentlyInfected * factor;
-    severeImpact.infectionsByRequestedTime = severeImpact.currentlyInfected * factor;
+    impact.infectionsByRequestedTime = currentlyInfected * factor;
+    severeImpact.infectionsByRequestedTime =currentlyInfected * factor;
   } else if (data.timeToElapse >= 3) {
     factor = Math.floor(data.timeToElapse / 3);
-    impact.infectionsByRequestedTime = impact.currentlyInfected * (2 ** factor);
-    severeImpact.infectionsByRequestedTime = severeImpact.currentlyInfected * (2 ** factor);
+    impact.infectionsByRequestedTime = currentlyInfected * (2 ** factor);
+    severeImpact.infectionsByRequestedTime = currentlyInfected * (2 ** factor);
   }
-  impact.infectionsByRequestedTime = impact.currentlyInfected * (2 ** factor);
-  severeImpact.infectionsByRequestedTime = severeImpact.currentlyInfected * (2 ** factor);
+  
   // doubles currently infected every 3days
   const outputData = {
     data,
