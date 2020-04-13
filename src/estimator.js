@@ -39,9 +39,9 @@ const covid19ImpactEstimator = (data) => {
   severeImpact.casesForICUByRequestedTime = severeImpact.infectionsByRequestedTime * 0.05;
   impact.casesForVentilatorsByRequestedTime = impact.infectionsByRequestedTime * 0.02;
   severeImpact.casesForVentilatorsByRequestedTime = severeImpact.infectionsByRequestedTime * 0.02;
-  impact.dollarsInFlight = impact.infectionsByRequestedTime * data.avgDailyIncomePopulation)
+  impact.dollarsInFlight = (impact.infectionsByRequestedTime * data.avgDailyIncomePopulation)
       * data.avgDailyIncomeInUSD * data.timeToElapse;
-  severeImpact.dollarsInFlight = severeImpact.infectionsByRequestedTime * data.avgDailyIncomePopulation)
+  severeImpact.dollarsInFlight = (severeImpact.infectionsByRequestedTime * data.avgDailyIncomePopulation)
       * data.avgDailyIncomeInUSD * data.timeToElapse;
     
 
