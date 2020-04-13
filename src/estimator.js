@@ -4,24 +4,25 @@ const covid19ImpactEstimator = (data) => {
   let currentlyInfected;
   let factor;
   let num;
+  const days = data.periodType.toLowerCase();
 
 
   impact.currentlyInfected = data.reportedCases * 10;
   severeImpact.currentlyInfected = data.reportedCases * 50;
   // converts to days
-  if (data.periodType === 'days') {
+  if (days === 'days') {
     data.timeToElapse *= 1;
-  } else if (data.periodType === 'weeks') {
+  } else if (days === 'weeks') {
     data.timeToElapse *= 7;
-  } else if (data.periodType === 'months') {
+  } else if (days === 'months') {
     data.timeToElapse *= 30;
   }
   // double report every 3 days
-  if (data.periodType === 'days' && data.timeToElapse < 3) {
+  if (days === 'days' && data.timeToElapse < 3) {
     factor = 1;
     num = 1;
   } else if (data.timeToElapse >= 3) {
-    factor = data.timeToElapse / 3;
+    factor = Math.floor(data.timeToElapse / 3);
     num = 2;
   }
 
