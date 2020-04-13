@@ -7,8 +7,8 @@ const covid19ImpactEstimator = (data) => {
   let infectionByRequestedTime;
   let severeCasesByRequestedTime;
   let casesForICUByRequestedTime;
-  let casesForVentilatorsByRequestedTime,
-  let dollarsInFlight
+  let casesForVentilatorsByRequestedTime;
+  let dollarsInFlight;
 
 
 
@@ -28,7 +28,7 @@ const covid19ImpactEstimator = (data) => {
     factor = 1;
     num = 1;
   } else if (data.timeToElapse >= 3) {
-    factor = data.timeToElapse / 3;
+    factor = Math.floor(data.timeToElapse / 3);
     num = 2;
   }
   impact.infectionsByRequestedTime = impact.currentlyInfected * (num ** factor);  
@@ -40,9 +40,9 @@ const covid19ImpactEstimator = (data) => {
   impact.casesForVentilatorsByRequestedTime = impact.infectionsByRequestedTime * 0.02;
   severeImpact.casesForVentilatorsByRequestedTime = severeImpact.infectionsByRequestedTime * 0.02;
   impact.dollarsInFlight = impact.infectionsByRequestedTime * data.avgDailyIncomePopulation)
-      * data.avgDailyIncomeInUSD * data.timeToElapse
+      * data.avgDailyIncomeInUSD * data.timeToElapse;
   severeImpact.dollarsInFlight = severeImpact.infectionsByRequestedTime * data.avgDailyIncomePopulation)
-      * data.avgDailyIncomeInUSD * data.timeToElapse
+      * data.avgDailyIncomeInUSD * data.timeToElapse;
     
 
   const outputData = {
