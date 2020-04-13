@@ -1,49 +1,28 @@
 const covid19ImpactEstimator = (data) => {
-  let InputData = {
-    data: {
-      region: {
-        name: regionName,
-        avgAge,
-        avgDailyIncomeInUSD,
-        avgDailyIncomePopulation
-      },
-      periodType,
-      timeToElapse,
-      reportedCases,
-      population,
-      totalHospitalBeds
-    }
-  };
-  InputData = data;
+  let factor;
 
   const outputData = {
-    data: InputData,
+    data,
     impact: {
-      currentlyInfected: (reportedCases) => reportedCases * 10,
-      infectionsByRequestedTime: (currentlyInfected, factor) => currentlyInfected * (2 ** factor),
-      severeCasesByRequestedTime: (infectionsByRequestedTime) => infectionsByRequestedTime * 0.15,
-      hospitalBedsByRequestedTime: (totalHospitalBeds) => totalHospitalBeds * 0.35,
-      casesForICUByRequestedTime: (infectionsByRequestedTime) => infectionsByRequestedTime
-      * 0.05,
-      casesForVentilatorsByRequestedTime: (infectionsByRequestedTime) => infectionsByRequestedTime
-       * 0.02,
-      dollarsInFlight: (infectionsByRequestedTime, avgDailyIncomeInUSD,
-        avgDailyIncomePopulation, timeToElapse) => (infectionsByRequestedTime
-          * avgDailyIncomePopulation) * avgDailyIncomeInUSD * timeToElapse
+      currentlyInfected: data.reportedCases * 10,
+      infectionsByRequestedTime: this.currentlyInfected * (2 ** factor),
+      severeCasesByRequestedTime: this.infectionsByRequestedTime * 0.15,
+      hospitalBedsByRequestedTime: data.totalHospitalBeds * 0.35,
+      casesForICUByRequestedTime: this.infectionsByRequestedTime * 0.05,
+      casesForVentilatorsByRequestedTime: this.infectionsByRequestedTime * 0.02,
+      dollarsInFlight: (this.infectionsByRequestedTime * data.avgDailyIncomePopulation)
+      * data.avgDailyIncomeInUSD * data.timeToElapse
     },
     //  severe case estimation
     severeImpact: {
-      currentlyInfected: (reportedCases) => reportedCases * 50,
-      infectionsByRequestedTime: (currentlyInfected, factor) => currentlyInfected * (2 ** factor),
-      severeCasesByRequestedTime: (infectionsByRequestedTime) => infectionsByRequestedTime * 0.15,
-      hospitalBedsByRequestedTime: (totalHospitalBeds) => totalHospitalBeds * 0.35,
-      casesForICUByRequestedTime: (infectionsByRequestedTime) => infectionsByRequestedTime
-       * 0.05,
-      casesForVentilatorsByRequestedTime: (infectionsByRequestedTime) => infectionsByRequestedTime
-       * 0.02,
-      dollarsInFlight: (infectionsByRequestedTime, avgDailyIncomeInUSD,
-        avgDailyIncomePopulation, timeToElapse) => (infectionsByRequestedTime
-           * avgDailyIncomePopulation) * avgDailyIncomeInUSD * timeToElapse
+      currentlyInfected: data.reportedCases * 50,
+      infectionsByRequestedTime: this.currentlyInfected * (2 ** factor),
+      severeCasesByRequestedTime: this.infectionsByRequestedTime * 0.15,
+      hospitalBedsByRequestedTime: data.totalHospitalBeds * 0.35,
+      casesForICUByRequestedTime: this.infectionsByRequestedTime * 0.05,
+      casesForVentilatorsByRequestedTime: this.infectionsByRequestedTime * 0.02,
+      dollarsInFlight: (this.infectionsByRequestedTime * data.avgDailyIncomePopulation)
+       * data.avgDailyIncomeInUSD * data.timeToElapse
     }
 
   };
