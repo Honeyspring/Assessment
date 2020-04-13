@@ -1,10 +1,9 @@
 const covid19ImpactEstimator = (data) => {
-  let factor = 1;
-  let currentlyInfected;
-  let infectionsByRequestedTime;
   const impact = {};
   const severeImpact = {};
-
+  let currentlyInfected;
+  let factor = 1;
+  let infectionsByRequestedTime;
 
   impact.currentlyInfected = data.reportedCases * 10;
   severeImpact.currentlyInfected = data.reportedCases * 50;
@@ -17,6 +16,7 @@ const covid19ImpactEstimator = (data) => {
   } else if (data.periodType === 'months') {
     data.timeToElapse *= 30;
   }
+  // double report every 3 days
   if (data.periodType === 'days' && data.timeToElapse < 3) {
     impact.infectionsByRequestedTime = impact.currentlyInfected * factor;
     severeImpact.infectionsByRequestedTime = severeImpact.currentlyInfected * factor;
