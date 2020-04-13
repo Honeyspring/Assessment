@@ -64,7 +64,7 @@ const covid19ImpactEstimator = (data) => {
       hospitalBedsByRequestedTime: data.totalHospitalBeds * 0.35,
       casesForICUByRequestedTime,
       casesForVentilatorsByRequestedTime,
-      dollars in flight, 
+      dollarsInFlight, 
     }
 
   };
