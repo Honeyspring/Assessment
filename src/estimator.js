@@ -7,6 +7,7 @@ const covid19ImpactEstimator = (data) => {
 
   impact.currentlyInfected = data.reportedCases * 10;
   severeImpact.currentlyInfected = data.reportedCases * 50;
+   
 
   // converts to days
   if (data.periodType === 'days') {
@@ -25,7 +26,8 @@ const covid19ImpactEstimator = (data) => {
     impact.infectionsByRequestedTime = impact.currentlyInfected * (2 ** factor);
     severeImpact.infectionsByRequestedTime = severeImpact.currentlyInfected * (2 ** factor);
   }
-
+  impact.infectionsByRequestedTime = impact.currentlyInfected * (2 ** factor);
+  severeImpact.infectionsByRequestedTime = severeImpact.currentlyInfected * (2 ** factor);
   // doubles currently infected every 3days
   const outputData = {
     data,
