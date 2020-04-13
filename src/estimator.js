@@ -1,6 +1,15 @@
 const covid19ImpactEstimator = (data) => {
   let factor;
-
+  let currentlyInfected;
+  Math.floor(data.AvgDailyIncomeInUSD);
+  Math.floor(data.IncomePopulation);
+  // converts to days
+  if (data.periodType === 'Weekly') {
+    data.timeToElapse *= 7;
+  } else if (data.periodType === 'Monthly') {
+    data.timeToElapse *= 30;
+  }
+  // doubles currently infected every 3days
   const outputData = {
     data,
     impact: {
@@ -26,6 +35,16 @@ const covid19ImpactEstimator = (data) => {
     }
 
   };
+
+  if (data.periodType === 'Daily' && data.timeToElapse < 3) {
+    outputData.impact.infectionsByRequestedTime = currentlyInfected * factor;
+    outputData.servereImpact.infectionsByRequestedTime = currentlyInfected * factor;
+  } else if (data.timeToElapse >= 3) {
+    factor = Math.floor(data.timeToElapse / 3);
+    outputData.impact.infectionsByRequestedTime = currentlyInfected * (2 ** factor);
+    outputData.servereImpact.infectionsByRequestedTime = currentlyInfected * (2 ** factor);
+  }
+
   return outputData;
 };
 
