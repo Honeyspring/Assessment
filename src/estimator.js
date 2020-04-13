@@ -3,6 +3,12 @@ const covid19ImpactEstimator = (data) => {
   let currentlyInfected;
   Math.floor(data.AvgDailyIncomeInUSD);
   Math.floor(data.IncomePopulation);
+  // checks between impact and severe impact
+  if (data.severeImpact) {
+    currentlyInfected = data.reportedCases * 50;
+  } else {
+    currentlyInfected = data.reportedCases * 10;
+  }
   // converts to days
   if (data.periodType === 'Weekly') {
     data.timeToElapse *= 7;
@@ -13,7 +19,7 @@ const covid19ImpactEstimator = (data) => {
   const outputData = {
     data,
     impact: {
-      currentlyInfected: data.reportedCases * 10,
+      currentlyInfected,
       infectionsByRequestedTime: this.currentlyInfected * (2 ** factor),
       severeCasesByRequestedTime: this.infectionsByRequestedTime * 0.15,
       hospitalBedsByRequestedTime: data.totalHospitalBeds * 0.35,
@@ -24,7 +30,7 @@ const covid19ImpactEstimator = (data) => {
     },
     //  severe case estimation
     severeImpact: {
-      currentlyInfected: data.reportedCases * 50,
+      currentlyInfected,
       infectionsByRequestedTime: this.currentlyInfected * (2 ** factor),
       severeCasesByRequestedTime: this.infectionsByRequestedTime * 0.15,
       hospitalBedsByRequestedTime: data.totalHospitalBeds * 0.35,
