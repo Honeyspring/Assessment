@@ -21,7 +21,7 @@ const covid19ImpactEstimator = (data) => {
     factor = 1;
     num = 1;
   } else if (data.timeToElapse >= 3) {
-    factor = Math.floor(data.timeToElapse / 3);
+    factor = data.timeToElapse / 3;
     num = 2;
   }
 
