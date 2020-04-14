@@ -2,19 +2,19 @@ const covid19ImpactEstimator = (data) => {
   const impact = {};
   const severeImpact = {};
   let factor;
-  const days = data.periodType.toLowerCase();
+  const days = data.periodType;
 
 
   // converts to days
   if (days === 'days') {
     data.timeToElapse *= 1;
-    factor = Math.trunc(2 ** (data.timeToElapse / 3));
+    factor = 2 ** Math.trunc((data.timeToElapse / 3));
   } else if (days === 'weeks') {
     data.timeToElapse *= 7;
-    factor = Math.trunc(2 ** (data.timeToElapse / 3));
-  } else if (days === 'months') {
+    factor = 2 ** Math.trunc((data.timeToElapse / 3));
+  } else {
     data.timeToElapse *= 30;
-    factor = Math.trunc(2 ** (data.timeToElapse / 3));
+    factor = 2 ** Math.trunc((data.timeToElapse / 3));
   }
 
   impact.currentlyInfected = data.reportedCases * 10;
