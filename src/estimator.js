@@ -1,14 +1,9 @@
 const covid19ImpactEstimator = (data) => {
-  const impact = {};
-  const severeImpact = {};
-  let currentlyInfected;
   let factor;
   let num;
   const days = data.periodType.toLowerCase();
 
 
-  impact.currentlyInfected = data.reportedCases * 10;
-  severeImpact.currentlyInfected = data.reportedCases * 50;
   // converts to days
   if (days === 'days') {
     data.timeToElapse *= 1;
@@ -30,7 +25,7 @@ const covid19ImpactEstimator = (data) => {
   const outputData = {
     data,
     impact: {
-      currentlyInfected,
+      currentlyInfected: data.reportedCases * 10,
       infectionsByRequestedTime: this.currentlyInfected * (num ** factor),
       severeCasesByRequestedTime: this.infectionsByRequestedTime * 0.15,
       hospitalBedsByRequestedTime: data.totalHospitalBeds * 0.35,
@@ -41,7 +36,7 @@ const covid19ImpactEstimator = (data) => {
     },
     //  severe case estimation
     severeImpact: {
-      currentlyInfected,
+      currentlyInfected: data.reportedCases * 50,
       infectionsByRequestedTime: this.currentlyInfected * (num ** factor),
       severeCasesByRequestedTime: this.infectionsByRequestedTime * 0.15,
       hospitalBedsByRequestedTime: data.totalHospitalBeds * 0.35,
